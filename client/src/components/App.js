@@ -16,11 +16,12 @@ import {
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import Post from './post/';
+import PostList from './post-list/';
 
 function App() {
 	return (
 		<div className="App">
-			<Navbar color="light" light expand="md">
+			<Navbar color="light" light expand="md" sticky="top">
 				<NavbarBrand href="/">Miniblog</NavbarBrand>
 
 				<Nav className="mr-auto" navbar>
@@ -33,6 +34,9 @@ function App() {
 			</Navbar>
 
 			<Post />
+			<PostList />
+
+
 		</div>
 	);
 }

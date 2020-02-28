@@ -3,7 +3,7 @@ import './style.css';
 
 function Login() {
 	return (
-		<div className="App">
+		<div className="Login">
 			
 		</div>
 	);
