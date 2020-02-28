@@ -15,6 +15,7 @@ import {
 	NavbarText
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import Login from './login/';
 import Post from './post/';
 import PostList from './post-list/';
 
@@ -33,8 +34,9 @@ function App() {
 				<NavLink href="/login">Login</NavLink>
 			</Navbar>
 
-			<Post />
+			<Login />
 			<PostList />
+			<Post />
 
 
 		</div>
