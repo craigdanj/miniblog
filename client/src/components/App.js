@@ -3,8 +3,6 @@ import './App.css';
 import {
 	Navbar,
 	NavbarBrand,
-	Nav,
-	NavItem,
 	NavLink
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
