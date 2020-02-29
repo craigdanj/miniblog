@@ -42,13 +42,14 @@ function PostList() {
 					<PaginationItem>
 						<PaginationLink previous href="#" />
 					</PaginationItem>
+
 					<PaginationItem>
-						<PaginationLink href="#">
+						<PaginationLink href="/posts/1">
 							1
 						</PaginationLink>
 					</PaginationItem>
 					<PaginationItem>
-						<PaginationLink href="#">
+						<PaginationLink href="/posts/2">
 							2
 						</PaginationLink>
 					</PaginationItem>
@@ -60,11 +61,6 @@ function PostList() {
 					<PaginationItem>
 						<PaginationLink href="#">
 							4
-						</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">
-							5
 						</PaginationLink>
 					</PaginationItem>
 

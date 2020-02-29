@@ -39,6 +39,9 @@ function App() {
 					<Route path="/post/:id">
 						<Post />
 					</Route>
+					<Route path="/posts/:pageNo">
+						<PostList />
+					</Route>
 					<Route path="/">
 						<PostList />
 					</Route>
