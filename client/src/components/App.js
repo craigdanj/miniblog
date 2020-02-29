@@ -20,7 +20,6 @@ import Post from './post/';
 import PostList from './post-list/';
 
 
-
 function App() {
 	return (
 		<div className="App">
@@ -40,21 +39,17 @@ function App() {
 					<NavLink href="/login">Login</NavLink>
 				</Navbar>
 
-				<div>
-					{/* A <Switch> looks through its children <Route>s and
-						renders the first one that matches the current URL. */}
-					<Switch>
-						<Route path="/login">
-							<Login />
-						</Route>
-						<Route path="/post/:id">
-							<Post />
-						</Route>
-						<Route path="/">
-							<PostList />
-						</Route>
-					</Switch>
-				</div>
+				<Switch>
+					<Route path="/login">
+						<Login />
+					</Route>
+					<Route path="/post/:id">
+						<Post />
+					</Route>
+					<Route path="/">
+						<PostList />
+					</Route>
+				</Switch>
 			</Router>
 
 
