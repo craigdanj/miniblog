@@ -15,6 +15,7 @@ function PostList() {
 						<Media heading>
 							<a href="/post/1">Post title</a>
 						</Media>
+						<p>12/2/2020</p>
 						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
 					</Media>
 				</Media>
@@ -29,6 +30,7 @@ function PostList() {
 						<Media heading>
 							<a href="/post/2">Post title</a>
 						</Media>
+						<p>12/2/2020</p>
 						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
 					</Media>
 				</Media>

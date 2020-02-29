@@ -21,7 +21,7 @@ function Login() {
 									<Input placeholder="password" type="password" />
 								</InputGroup>
 								<br />
-								<Button>Login</Button>
+								<Button color="primary">Login</Button>
 							</CardBody>
 						</Card>
 					</Col>
