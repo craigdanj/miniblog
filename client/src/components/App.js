@@ -24,7 +24,6 @@ function App() {
 	return (
 		<div className="App">
 			<Router>
-
 				<Navbar color="light" light expand="md" sticky="top">
 					<NavbarBrand href="/">
 						<Link to="/">Miniblog</Link>
@@ -51,8 +50,6 @@ function App() {
 					</Route>
 				</Switch>
 			</Router>
-
-
 		</div>
 	);
 }
