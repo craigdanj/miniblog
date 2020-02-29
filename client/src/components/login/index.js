@@ -8,17 +8,19 @@ function Login() {
 			 <Container>
 				<Row>
 					<Col sm="12" md={{ size: 6, offset: 3 }}>
-						<Card>
+						<Card className="loginForm">
 							<CardBody>
 								<h2>Login</h2>
 								<CardText>Enter your username and password to login</CardText>
-								<InputGroup>
-									<Input placeholder="username" />
-								</InputGroup>
 								
+								<InputGroup>
+									<Input placeholder="username" className="field" />
+								</InputGroup>
+								<br />
 								<InputGroup>
 									<Input placeholder="password" type="password" />
 								</InputGroup>
+								<br />
 								<Button>Login</Button>
 							</CardBody>
 						</Card>
