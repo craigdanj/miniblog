@@ -1,42 +1,61 @@
 import React from 'react';
 import './App.css';
 import {
-	Collapse,
 	Navbar,
-	NavbarToggler,
 	NavbarBrand,
 	Nav,
 	NavItem,
-	NavLink,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
-	NavbarText
+	NavLink
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link
+} from "react-router-dom";
+
 import Login from './login/';
 import Post from './post/';
 import PostList from './post-list/';
 
+
+
 function App() {
 	return (
 		<div className="App">
-			<Navbar color="light" light expand="md" sticky="top">
-				<NavbarBrand href="/">Miniblog</NavbarBrand>
+			<Router>
 
-				<Nav className="mr-auto" navbar>
-					<NavItem>
-						<NavLink href="/profile">Profile</NavLink>
-					</NavItem>
-				</Nav>
+				<Navbar color="light" light expand="md" sticky="top">
+					<NavbarBrand href="/">
+						<Link to="/">Miniblog</Link>
+					</NavbarBrand>
 
-				<NavLink href="/login">Login</NavLink>
-			</Navbar>
+					<Nav className="mr-auto" navbar>
+						<NavItem>
+							<Link to="/post/2">Post</Link>
+						</NavItem>
+					</Nav>
 
-			<Login />
-			<PostList />
-			<Post />
+					<NavLink href="/login">Login</NavLink>
+				</Navbar>
+
+				<div>
+					{/* A <Switch> looks through its children <Route>s and
+						renders the first one that matches the current URL. */}
+					<Switch>
+						<Route path="/login">
+							<Login />
+						</Route>
+						<Route path="/post/:id">
+							<Post />
+						</Route>
+						<Route path="/">
+							<PostList />
+						</Route>
+					</Switch>
+				</div>
+			</Router>
 
 
 		</div>
