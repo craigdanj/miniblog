@@ -8,8 +8,8 @@ const port = 8080;
 
 app.use('/graphql', graphqlHttp({
     schema: graphqlSchema,
-    rootValue: graphqlResolvers
-
+    rootValue: graphqlResolvers,
+    graphiql: true
 }));
 
 app.listen(port, () => console.log(`Miniblog server listening on port ${port}!`))
