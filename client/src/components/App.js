@@ -25,15 +25,9 @@ function App() {
 		<div className="App">
 			<Router>
 				<Navbar color="light" light expand="md" sticky="top">
-					<NavbarBrand href="/">
+					<NavbarBrand href="/" className="mr-auto">
 						<Link to="/">Miniblog</Link>
 					</NavbarBrand>
-
-					<Nav className="mr-auto" navbar>
-						<NavItem>
-							<Link to="/post/2">Post</Link>
-						</NavItem>
-					</Nav>
 
 					<NavLink href="/login">Login</NavLink>
 				</Navbar>
