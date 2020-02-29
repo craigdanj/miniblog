@@ -1,5 +1,5 @@
 import React from 'react';
-import { Media } from 'reactstrap';
+import { Media, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import './style.css';
 
 function PostList() {
@@ -32,6 +32,49 @@ function PostList() {
 						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
 					</Media>
 				</Media>
+			</div>
+
+			<div className="paginationContainer d-flex justify-content-center">
+				<Pagination aria-label="Page navigation example">
+					<PaginationItem>
+						<PaginationLink first href="#" />
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink previous href="#" />
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink href="#">
+							1
+						</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink href="#">
+							2
+						</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink href="#">
+							3
+						</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink href="#">
+							4
+						</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink href="#">
+							5
+						</PaginationLink>
+					</PaginationItem>
+
+					<PaginationItem>
+						<PaginationLink next href="#" />
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink last href="#" />
+					</PaginationItem>
+				</Pagination>
 			</div>
 		</div>
 	);
