@@ -1,4 +1,3 @@
-// const { buildSchema } = require('graphql');
 const { gql } = require('apollo-server');
 
 module.exports = gql`

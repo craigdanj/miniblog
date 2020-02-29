@@ -1,3 +1,5 @@
+//import models here
+
 module.exports = {
     Query: {
 		posts: () => [
