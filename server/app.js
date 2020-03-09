@@ -2,6 +2,11 @@ const Sequelize = require('sequelize');
 const { ApolloServer } = require('apollo-server');
 
 const graphqlSchema = require('./graphql/schema');
+const _ = require('lodash');
+const faker = require('faker');
+
+//Setting seed for consistent results
+faker.seed(123);
 
 //======================================================
 //Connect to the db
@@ -32,22 +37,21 @@ const PostModel = sequelize.define('posts', {
     }
 });
 
+PostModel.sync({force: true}).then(() => {
+
+	_.times(10, (index) => {
+		return PostModel.create({
+			title: faker.lorem.sentence(),
+            content: faker.lorem.sentences()
+		});
+	});
+});
+
 //======================================================
 //Resolvers
 const graphqlResolvers = {
     Query: {
-		posts: () => [
-            {
-                title: 'boom',
-                content: 'bamm',
-                id: 1
-            },
-            {
-                title: 'boom2',
-                content: 'bamm2',
-                id: 2
-            }
-        ],
+		posts: () => PostModel.findAll()
 	},
 	Mutation: {
 		editPost() {
