@@ -26,7 +26,8 @@ function PostList() {
 		</Container>
 	);
 	if (error) return <p>ERROR</p>;
-	if (!data) return <p>Not found</p>;
+	if (!data) return <p>No posts written yet.</p>;
+
 	else {
 		postList = data.posts.map(post => (
 			<div className="postExcerpt">
