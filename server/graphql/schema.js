@@ -9,13 +9,18 @@ module.exports = gql`
         createdAt: String!
     }
 
+    type PostResponse {
+        total: Int!
+        posts: [Post]
+    }
+
     input PostInputData {
         title: String!
         content: String!
     }
 
     type Query {
-		posts: [Post]
+		posts(page: Int): PostResponse
 	}
 
     type Mutation {

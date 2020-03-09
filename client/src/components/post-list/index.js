@@ -7,9 +7,12 @@ import gql from "graphql-tag";
 const GET_POSTS = gql`
 	query {
 		posts {
-			id
-			content
-			title
+			total
+			posts {
+				id
+				title
+				content
+			}
 		}
 	}
 `;
@@ -29,8 +32,8 @@ function PostList() {
 	if (!data) return <p>No posts written yet.</p>;
 
 	else {
-		postList = data.posts.map(post => (
-			<div className="postExcerpt">
+		postList = data.posts.posts.map(post => (
+			<div className="postExcerpt" key={post.id}>
 				<Media>
 					<Media left href="#">
 						<Media object src="https://via.placeholder.com/100/09f/fff.png%20C/O%20https://placeholder.com/" alt="Generic placeholder image" />

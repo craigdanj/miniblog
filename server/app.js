@@ -51,7 +51,10 @@ PostModel.sync({force: true}).then(() => {
 //Resolvers
 const graphqlResolvers = {
     Query: {
-		posts: () => PostModel.findAll()
+		posts: () => ({
+            posts: PostModel.findAll(),
+            total: 10
+        })
 	},
 	Mutation: {
 		editPost() {
