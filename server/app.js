@@ -40,12 +40,12 @@ const graphqlResolvers = {
             {
                 title: 'boom',
                 content: 'bamm',
-                _id: 1
+                id: 1
             },
             {
                 title: 'boom2',
                 content: 'bamm2',
-                _id: 2
+                id: 2
             }
         ],
 	},
