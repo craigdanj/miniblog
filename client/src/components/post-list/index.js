@@ -1,5 +1,5 @@
 import React from 'react';
-import { Media, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Media, Pagination, PaginationItem, PaginationLink, Spinner, Container } from 'reactstrap';
 import './style.css';
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -20,7 +20,11 @@ function PostList() {
 	console.log(data)
 	let postList = [];
 
-	if (loading) return <p>LOADING!</p>;
+	if (loading) return (
+		<Container className="themed-container">
+			<Spinner type="grow" color="primary" />
+		</Container>
+	);
 	if (error) return <p>ERROR</p>;
 	if (!data) return <p>Not found</p>;
 	else {
