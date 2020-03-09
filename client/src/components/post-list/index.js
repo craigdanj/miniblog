@@ -1,41 +1,51 @@
 import React from 'react';
 import { Media, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import './style.css';
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+const GET_POSTS = gql`
+	query {
+		posts {
+			id
+			content
+			title
+		}
+	}
+`;
 
 function PostList() {
+
+	const { data, loading, error } = useQuery(GET_POSTS);
+	console.log(data)
+	let postList = [];
+
+	if (loading) return <p>LOADING!</p>;
+	if (error) return <p>ERROR</p>;
+	if (!data) return <p>Not found</p>;
+	else {
+		postList = data.posts.map(post => (
+			<div className="postExcerpt">
+				<Media>
+					<Media left href="#">
+						<Media object src="https://via.placeholder.com/100/09f/fff.png%20C/O%20https://placeholder.com/" alt="Generic placeholder image" />
+					</Media>
+
+					<Media body>
+						<Media heading>
+							<a href="/post/1">{post.title}</a>
+						</Media>
+						<p>12/2/2020</p>
+						{post.content}
+					</Media>
+				</Media>
+			</div>
+		));
+	}
+
 	return (
 		<div className="postList">
-			<div className="postExcerpt">
-				<Media>
-					<Media left href="#">
-						<Media object src="https://via.placeholder.com/100/09f/fff.png%20C/O%20https://placeholder.com/" alt="Generic placeholder image" />
-					</Media>
-
-					<Media body>
-						<Media heading>
-							<a href="/post/1">Post title</a>
-						</Media>
-						<p>12/2/2020</p>
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-					</Media>
-				</Media>
-			</div>
-			<div className="postExcerpt">
-				<Media>
-					<Media left href="#">
-						<Media object src="https://via.placeholder.com/100/09f/fff.png%20C/O%20https://placeholder.com/" alt="Generic placeholder image" />
-					</Media>
-
-					<Media body>
-						<Media heading>
-							<a href="/post/2">Post title</a>
-						</Media>
-						<p>12/2/2020</p>
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-					</Media>
-				</Media>
-			</div>
-
+			{postList}
 			<div className="paginationContainer d-flex justify-content-center">
 				<Pagination aria-label="Page navigation example">
 					<PaginationItem>
