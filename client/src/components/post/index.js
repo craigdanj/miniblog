@@ -3,21 +3,23 @@ import { useQuery } from "@apollo/react-hooks";
 import { Jumbotron, Button, Container, Spinner } from 'reactstrap';
 import './style.css';
 import gql from "graphql-tag";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 function Post() {
 	const [token, setToken] = useState(null);
+	const { id } = useParams();
+	const history = useHistory();
 
 	useEffect(() => {
 		const t = localStorage.getItem('token');
 
 		if(t) {
-			setToken(t)
+			setToken(t);
 		}
 	}, []);
 
 	const handleEdit = () => {
-		alert("Edit");
+		history.push(`/postedit/${id}`);
 	}
 
 	const GET_POST = gql`
@@ -29,8 +31,6 @@ function Post() {
 			}
 		}
 	`;
-
-	const { id } = useParams();
 
 	const { data, loading, error } = useQuery(GET_POST, {
 		variables: {

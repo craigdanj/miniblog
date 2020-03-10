@@ -17,6 +17,7 @@ import {
 import Login from './login/';
 import Post from './post/';
 import PostList from './post-list/';
+import PostEdit from './post-edit/';
 
 
 function App() {
@@ -67,7 +68,6 @@ function App() {
 						:
 						<NavLink href="/login">Login</NavLink>
 					}
-					
 				</Navbar>
 
 				<Switch>
@@ -76,6 +76,9 @@ function App() {
 					</Route>
 					<Route path="/post/:id">
 						<Post />
+					</Route>
+					<Route path="/postedit/:id">
+						<PostEdit />
 					</Route>
 					<Route path="/posts/:pageNo">
 						<PostList />
