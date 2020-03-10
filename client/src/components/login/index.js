@@ -41,13 +41,14 @@ const Login = props => {
 		login();
 		setFormDirty(false);
 	}
+
 	console.log(called, data, loading, error);
 
 	if (!formDirty && !loading && data) {
 		console.log('boom')
 		localStorage.setItem('token', data.login.token);
 		localStorage.setItem('username', data.login.userName);
-
+		props.loginComplete();
 		return <Redirect to="/" />
 	}
 

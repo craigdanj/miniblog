@@ -22,19 +22,31 @@ function App() {
 
 	const [token, setToken] = useState(null);
 	const [username, setUserName] = useState(null);
+	let t = null;
+	let user = null;
 
-	const t = localStorage.getItem('token');
-	const user = localStorage.getItem('username');
+	useEffect(() => {
+		t = localStorage.getItem('token');
+		user = localStorage.getItem('username');
 
-	useEffect(()=> {
 		if(t) {
 			setToken(t)
 			setUserName(user)
 		}
-	}, [t, user]);
+	}, []);
 
-	console.log(token, username);
-	
+	const handleLogin = () => {
+		console.log('handleLogin called');
+		t = localStorage.getItem('token');
+		user = localStorage.getItem('username');
+		console.log(t, user);
+
+		if(t) {
+			console.log('yes t');
+			setToken(t)
+			setUserName(user)
+		}
+	}
 
 	return (
 		<div className="App">
@@ -45,7 +57,7 @@ function App() {
 					</NavbarBrand>
 
 					{token ?
-						<a>Logout of {username}</a>
+						<a>Logout {username}</a>
 						:
 						<NavLink href="/login">Login</NavLink>
 					}
@@ -54,7 +66,7 @@ function App() {
 
 				<Switch>
 					<Route path="/login">
-						<Login />
+						<Login loginComplete={handleLogin}/>
 					</Route>
 					<Route path="/post/:id">
 						<Post />
