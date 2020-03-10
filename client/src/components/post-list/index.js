@@ -3,30 +3,29 @@ import { Media, Pagination, PaginationItem, PaginationLink, Spinner, Container }
 import './style.css';
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import {
+	useParams
+  } from "react-router-dom";
 
-const GET_POSTS = gql`
-	query {
-		posts(page: 3) {
-			total
-			posts {
-				id
-				title
-				content
-			}
-		}
-	}
-`;
-
-function PostList(props) {
+const PostList = props => {
 	console.log(props);
 
-	// const { match: { params } } = props;
-	// console.log("params", params);
+	const { pageNo } = useParams();
 
-
+	const GET_POSTS = gql`
+		query {
+			posts(page: ${pageNo || 1}) {
+				total
+				posts {
+					id
+					title
+					content
+				}
+			}
+		}
+	`;
 	const { data, loading, error } = useQuery(GET_POSTS);
 	const totalPostCount = data && data.posts && data.posts.total;
-	console.log(data);
 	let postList = [];
 	let paginationList = [];
 
@@ -95,6 +94,6 @@ function PostList(props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default PostList;
