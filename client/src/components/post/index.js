@@ -26,7 +26,6 @@ function Post() {
 				<hr className="my-2" />
 				<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
 				<p className="lead">
-				<Button color="primary">Learn More</Button>
 				</p>
 			</Jumbotron>
 		</div>
