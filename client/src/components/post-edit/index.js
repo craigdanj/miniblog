@@ -78,12 +78,13 @@ function PostEdit() {
 
 	const handleSave = () => {
 		editPost();
+		setFormDirty(false);
 	}
 
 
 	console.log(editedPostData, mutationProcessing, saveError);
 	if(editedPostData && !mutationProcessing && !saveError) {
-		
+
 	}
 
 	if (loading || mutationProcessing) return (
@@ -102,6 +103,12 @@ function PostEdit() {
 						{error && !formDirty && (
 							<Alert color="danger" fade={false}>
 								Could not login. Please ensure the username and password are correct.
+							</Alert>
+						)}
+
+						{editedPostData && !mutationProcessing && !saveError && !formDirty && (
+							<Alert color="success" fade={false}>
+								Changes saved successfully.
 							</Alert>
 						)}
 						<Card className="loginForm">
