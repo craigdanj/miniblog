@@ -3,7 +3,8 @@ import './App.css';
 import {
 	Navbar,
 	NavbarBrand,
-	NavLink
+	NavLink,
+	Button
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import {
@@ -36,16 +37,21 @@ function App() {
 	}, []);
 
 	const handleLogin = () => {
-		console.log('handleLogin called');
 		t = localStorage.getItem('token');
 		user = localStorage.getItem('username');
-		console.log(t, user);
 
 		if(t) {
-			console.log('yes t');
-			setToken(t)
-			setUserName(user)
+			setToken(t);
+			setUserName(user);
 		}
+	}
+
+	const handleLogout = () => {
+		localStorage.removeItem('token');
+		localStorage.removeItem('username');
+
+		setToken(null);
+		setUserName(null);
 	}
 
 	return (
@@ -57,7 +63,7 @@ function App() {
 					</NavbarBrand>
 
 					{token ?
-						<a>Logout {username}</a>
+						<Button onClick={handleLogout}>Logout {username}</Button>
 						:
 						<NavLink href="/login">Login</NavLink>
 					}
