@@ -73,6 +73,10 @@ const graphqlResolvers = {
 					userId: userId.toString(),
 					userName: 'Administrator'
 				}
+			} else {
+				const error = new Error('Failed login. Make sure the credentials enter are correct.');
+				error.code = 401;
+				throw error;
 			}
 		},
 		posts: (root ,args, context, info) => {

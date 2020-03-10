@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputGroup, Card, CardText, CardBody, Container, Row, Col, Button, Input } from 'reactstrap';
+import { InputGroup, Card, CardText, CardBody, Container, Row, Col, Button, Input, Alert } from 'reactstrap';
 import './style.css';
 import { useLazyQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -8,13 +8,16 @@ const Login = props => {
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [formDirty, setFormDirty] = useState(false);
 
 	const handleUsernameChange = e => {
 		setUsername(e.target.value);
+		setFormDirty(true);
 	}
 
 	const handlePasswordChange = e => {
 		setPassword(e.target.value);
+		setFormDirty(true);
 	}
 
 	const LOGIN = gql`
@@ -27,19 +30,30 @@ const Login = props => {
 		}
 	`;
 
-	const [login, { called, loading, data }] = useLazyQuery(LOGIN, {
+	const [login, { called, loading, data, error }] = useLazyQuery(LOGIN, {
 		variables: {
 			email: username,
 			password: password
 		}
 	});
-	console.log(called, data, loading);
+
+	const handleLogin = () => {
+		login();
+		setFormDirty(false);
+	}
+
+	console.log(called, data, loading, error);
 
 	return (
 		<div className="Login">
 			 <Container>
 				<Row>
 					<Col sm="12" md={{ size: 6, offset: 3 }}>
+						{error && !formDirty && (
+							<Alert color="danger" fade={false}>
+								Could not login. Please ensure the username and password are correct.
+							</Alert>
+						)}
 						<Card className="loginForm">
 							<CardBody>
 								<h2>Login</h2>
@@ -53,7 +67,7 @@ const Login = props => {
 									<Input placeholder="password" type="password" value={password} onChange={handlePasswordChange}/>
 								</InputGroup>
 								<br />
-								<Button color="primary" onClick={() => login()}>Login</Button>
+								<Button color="primary" onClick={handleLogin}>Login</Button>
 							</CardBody>
 						</Card>
 					</Col>
