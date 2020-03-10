@@ -4,6 +4,7 @@ import './style.css';
 import { useLazyQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Redirect } from "react-router-dom";
+
 const Login = props => {
 
 	const [username, setUsername] = useState('');
@@ -42,10 +43,7 @@ const Login = props => {
 		setFormDirty(false);
 	}
 
-	console.log(called, data, loading, error);
-
 	if (!formDirty && !loading && data) {
-		console.log('boom')
 		localStorage.setItem('token', data.login.token);
 		localStorage.setItem('username', data.login.userName);
 		props.loginComplete();

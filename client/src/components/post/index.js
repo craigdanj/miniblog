@@ -3,6 +3,21 @@ import { Jumbotron, Button } from 'reactstrap';
 import './style.css';
 
 function Post() {
+	const [token, setToken] = useState(null);
+	const [username, setUserName] = useState(null);
+	let t = null;
+	let user = null;
+
+	useEffect(() => {
+		t = localStorage.getItem('token');
+		user = localStorage.getItem('username');
+
+		if(t) {
+			setToken(t)
+			setUserName(user)
+		}
+	}, []);
+
 	return (
 		<div className="post">
 			<Jumbotron>
