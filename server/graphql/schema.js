@@ -28,6 +28,7 @@ module.exports = gql`
     type Query {
         login(email: String!, password: String!): AuthData!
 		posts(page: Int): PostResponse
+        post(id: Int): Post
 	}
 
     type Mutation {

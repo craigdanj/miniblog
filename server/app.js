@@ -94,6 +94,15 @@ const graphqlResolvers = {
 					total
 				}
 			});
+		},
+		post: (root ,args, context, info) => {
+			const id = args.id;
+
+			return PostModel.findOne({
+				where: {id}
+			}).then(post => {
+				return post
+			});
 		}
 	},
 	Mutation: {
