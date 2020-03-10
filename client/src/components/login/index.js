@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InputGroup, Card, CardText, CardBody, Container, Row, Col, Button, Input } from 'reactstrap';
 import './style.css';
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
-function Login() {
+const Login = props => {
+
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+
+	const handleUsernameChange = e => {
+		setUsername(e.target.value);
+	}
+
+	const handlePasswordChange = e => {
+		setPassword(e.target.value);
+	}
+
 	return (
 		<div className="Login">
 			 <Container>
@@ -14,11 +28,11 @@ function Login() {
 								<CardText>Enter your username and password to login</CardText>
 								
 								<InputGroup>
-									<Input placeholder="username" className="field" />
+									<Input placeholder="username" className="field" value={username} onChange={handleUsernameChange} />
 								</InputGroup>
 								<br />
 								<InputGroup>
-									<Input placeholder="password" type="password" />
+									<Input placeholder="password" type="password" value={password} onChange={handlePasswordChange}/>
 								</InputGroup>
 								<br />
 								<Button color="primary">Login</Button>
