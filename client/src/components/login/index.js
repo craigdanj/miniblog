@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { InputGroup, Card, CardText, CardBody, Container, Row, Col, Button, Input } from 'reactstrap';
 import './style.css';
-import { useQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 const Login = props => {
@@ -16,6 +16,24 @@ const Login = props => {
 	const handlePasswordChange = e => {
 		setPassword(e.target.value);
 	}
+
+	const LOGIN = gql`
+		query logUserIn($email: String!, $password: String!){
+			login(email: $email, password: $password) {
+				token
+				userId
+				userName
+			}
+		}
+	`;
+
+	const [login, { called, loading, data }] = useLazyQuery(LOGIN, {
+		variables: {
+			email: username,
+			password: password
+		}
+	});
+	console.log(called, data, loading);
 
 	return (
 		<div className="Login">
@@ -35,7 +53,7 @@ const Login = props => {
 									<Input placeholder="password" type="password" value={password} onChange={handlePasswordChange}/>
 								</InputGroup>
 								<br />
-								<Button color="primary">Login</Button>
+								<Button color="primary" onClick={() => login()}>Login</Button>
 							</CardBody>
 						</Card>
 					</Col>

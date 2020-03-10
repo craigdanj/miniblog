@@ -8,8 +8,6 @@ import {
 } from "react-router-dom";
 
 const PostList = props => {
-	console.log(props);
-
 	const { pageNo } = useParams();
 
 	const GET_POSTS = gql`
