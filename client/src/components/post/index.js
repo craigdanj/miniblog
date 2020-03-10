@@ -54,7 +54,7 @@ function Post() {
 				{token && <Button color="primary" onClick={handleEdit}>Edit</Button>}
 				<h1 className="display-3">{data.post.title}</h1>
 				<hr className="my-2" />
-				<div className="lead">
+				<div className="lead content">
 					{data.post.content}
 				</div>
 			</Jumbotron>

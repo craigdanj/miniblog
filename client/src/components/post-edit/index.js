@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import './style.css';
 import gql from "graphql-tag";
 import { useParams } from "react-router-dom";
@@ -39,6 +39,26 @@ function PostEdit() {
 		}
 	});
 
+	const EDIT_POST = gql`
+		mutation editPost($postInput: PostInputData!) {
+			editPost(postInput: $postInput) {
+				id
+				title
+				content
+			}
+		}
+	`;
+
+	const [editPost, { data: editedPostData, loading: mutationProcessing, error: saveError }] = useMutation(EDIT_POST, {
+		variables: {
+			postInput: {
+				title,
+				content,
+				id: parseInt(id)
+			}
+		}
+	});
+
 	useEffect(() => {
 		const t = localStorage.getItem('token');
 
@@ -53,23 +73,25 @@ function PostEdit() {
 			setTitle(data.post.title);
 			setContent(data.post.content);
 		}
-
 	}, [data]);
 
 
 	const handleSave = () => {
-		alert("saving")
+		editPost();
 	}
 
 
-	console.log(data, loading, error);
+	console.log(editedPostData, mutationProcessing, saveError);
+	if(editedPostData && !mutationProcessing && !saveError) {
+		
+	}
 
-	if (loading) return (
+	if (loading || mutationProcessing) return (
 		<Container className="themed-container">
 			<Spinner type="grow" color="primary" />
 		</Container>
 	);
-	if (error) return <p>ERROR</p>;
+	if (error || saveError) return <p>ERROR</p>;
 	if (!data) return <p>No post with that id exists.</p>;
 
 	return (

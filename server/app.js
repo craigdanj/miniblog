@@ -103,11 +103,26 @@ const graphqlResolvers = {
 			}).then(post => {
 				return post
 			});
+
+			//Add error handlign here too when building for production
 		}
 	},
 	Mutation: {
-		editPost() {
-			return null;
+		editPost(root ,args, context, info) {
+			return PostModel.findOne({
+				where: {
+					id: args.postInput.id
+				}
+			}).then(post => {
+				if(post) {
+					return post.update({
+						title: args.postInput.title,
+						content: args.postInput.content
+					}).then((post) => {
+						return post;
+					})
+				}
+			})
 		}
 	}
 };

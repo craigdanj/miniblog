@@ -9,12 +9,13 @@ module.exports = gql`
         createdAt: String!
     }
 
-    type PostResponse {
+    type PostsResponse {
         total: Int!
         posts: [Post]
     }
 
     input PostInputData {
+        id: Int!
         title: String!
         content: String!
     }
@@ -27,11 +28,11 @@ module.exports = gql`
 
     type Query {
         login(email: String!, password: String!): AuthData!
-		posts(page: Int): PostResponse
+		posts(page: Int): PostsResponse
         post(id: Int): Post
 	}
 
     type Mutation {
-		editPost(postInput: PostInputData): Post
+		editPost(postInput: PostInputData): Post!
 	}
 `;
