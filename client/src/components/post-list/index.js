@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import {
 	useParams
-  } from "react-router-dom";
+} from "react-router-dom";
 
 const PostList = props => {
 	console.log(props);
