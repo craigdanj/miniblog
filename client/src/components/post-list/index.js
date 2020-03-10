@@ -3,11 +3,9 @@ import { Media, Pagination, PaginationItem, PaginationLink, Spinner, Container }
 import './style.css';
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import {
-	useParams
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const PostList = props => {
+const PostList = () => {
 	const { pageNo } = useParams();
 
 	const GET_POSTS = gql`
@@ -22,6 +20,7 @@ const PostList = props => {
 			}
 		}
 	`;
+
 	const { data, loading, error } = useQuery(GET_POSTS);
 	const totalPostCount = data && data.posts && data.posts.total;
 	let postList = [];
@@ -45,7 +44,7 @@ const PostList = props => {
 
 					<Media body>
 						<Media heading>
-							<a href="/post/1">{post.title}</a>
+							<a href={`/post/${post.id}`}>{post.title}</a>
 						</Media>
 						<p>12/2/2020</p>
 						{post.content}
