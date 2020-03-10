@@ -46,12 +46,6 @@ PostModel.sync({force: true}).then(() => {
 		});
     });
 
-    
-
-	// PostModel.count().then(c => {
-	// 	console.log("There are " + c + " projects!")
-	// })
-
 });
 
 
@@ -61,7 +55,6 @@ PostModel.sync({force: true}).then(() => {
 const graphqlResolvers = {
     Query: {
 		posts: (root ,args, context, info) => {
-			console.log("Page", args.page);
 			const limit = 10;
 			const offset = args.page ? (args.page - 1) * limit : 0;
 
