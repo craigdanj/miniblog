@@ -39,22 +39,44 @@ const PostModel = sequelize.define('posts', {
 
 PostModel.sync({force: true}).then(() => {
 
-	_.times(10, (index) => {
+	_.times(25, () => {
 		return PostModel.create({
 			title: faker.lorem.sentence(),
             content: faker.lorem.sentences()
 		});
-	});
+    });
+
+    
+
+	// PostModel.count().then(c => {
+	// 	console.log("There are " + c + " projects!")
+	// })
+
 });
+
+
 
 //======================================================
 //Resolvers
 const graphqlResolvers = {
     Query: {
-		posts: () => ({
-            posts: PostModel.findAll(),
-            total: 10
-        })
+		posts: (root ,args, context, info) => {
+			console.log("Page", args.page);
+			const limit = 10;
+			const offset = args.page ? (args.page - 1) * limit : 0;
+
+			return PostModel.findAndCountAll({
+				offset,
+				limit
+			}).then(posts => {
+				const postRows = posts.rows;
+				const total = posts.count
+				return {
+					posts: postRows,
+					total
+				}
+			});
+		}
 	},
 	Mutation: {
 		editPost() {
