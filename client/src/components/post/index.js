@@ -1,26 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Jumbotron, Button } from 'reactstrap';
 import './style.css';
 
 function Post() {
 	const [token, setToken] = useState(null);
-	const [username, setUserName] = useState(null);
-	let t = null;
-	let user = null;
 
 	useEffect(() => {
-		t = localStorage.getItem('token');
-		user = localStorage.getItem('username');
+		const t = localStorage.getItem('token');
 
 		if(t) {
 			setToken(t)
-			setUserName(user)
 		}
 	}, []);
+
+	const handleEdit = () => {
+		alert("Edit");
+	}
 
 	return (
 		<div className="post">
 			<Jumbotron>
+				{token && <Button color="primary" onClick={handleEdit}>Edit</Button>}
 				<h1 className="display-3">Hello, world!</h1>
 				<p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
 				<hr className="my-2" />
