@@ -6,7 +6,7 @@ import gql from "graphql-tag";
 
 const GET_POSTS = gql`
 	query {
-		posts {
+		posts(page: 3) {
 			total
 			posts {
 				id
@@ -17,11 +17,18 @@ const GET_POSTS = gql`
 	}
 `;
 
-function PostList() {
+function PostList(props) {
+	console.log(props);
+
+	// const { match: { params } } = props;
+	// console.log("params", params);
+
 
 	const { data, loading, error } = useQuery(GET_POSTS);
-	console.log(data)
+	const totalPostCount = data && data.posts && data.posts.total;
+	console.log(data);
 	let postList = [];
+	let paginationList = [];
 
 	if (loading) return (
 		<Container className="themed-container">
@@ -49,6 +56,20 @@ function PostList() {
 				</Media>
 			</div>
 		));
+
+		const fullPages = parseInt(totalPostCount / 10);
+		const pageCount = totalPostCount % 10 ? (fullPages + 1): fullPages;
+
+		let i = 0;
+		for (i = 0; i < pageCount; i++) {
+			paginationList.push((
+				<PaginationItem key={i}>
+					<PaginationLink href={`/posts/${i+1}`}>
+						{i+1}
+					</PaginationLink>
+				</PaginationItem>
+			));
+		}
 	}
 
 	return (
@@ -56,40 +77,20 @@ function PostList() {
 			{postList}
 			<div className="paginationContainer d-flex justify-content-center">
 				<Pagination aria-label="Page navigation example">
-					<PaginationItem>
+					{/* <PaginationItem>
 						<PaginationLink first href="#" />
 					</PaginationItem>
 					<PaginationItem>
 						<PaginationLink previous href="#" />
-					</PaginationItem>
+					</PaginationItem> */}
 
-					<PaginationItem>
-						<PaginationLink href="/posts/1">
-							1
-						</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="/posts/2">
-							2
-						</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">
-							3
-						</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">
-							4
-						</PaginationLink>
-					</PaginationItem>
-
-					<PaginationItem>
+					{paginationList}
+					{/* <PaginationItem>
 						<PaginationLink next href="#" />
 					</PaginationItem>
 					<PaginationItem>
 						<PaginationLink last href="#" />
-					</PaginationItem>
+					</PaginationItem> */}
 				</Pagination>
 			</div>
 		</div>
