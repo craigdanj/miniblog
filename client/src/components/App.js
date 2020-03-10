@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import {
 	Navbar,
@@ -19,6 +19,23 @@ import PostList from './post-list/';
 
 
 function App() {
+
+	const [token, setToken] = useState(null);
+	const [username, setUserName] = useState(null);
+
+	const t = localStorage.getItem('token');
+	const user = localStorage.getItem('username');
+
+	useEffect(()=> {
+		if(t) {
+			setToken(t)
+			setUserName(user)
+		}
+	}, [t, user]);
+
+	console.log(token, username);
+	
+
 	return (
 		<div className="App">
 			<Router>
@@ -27,7 +44,12 @@ function App() {
 						<Link to="/">Miniblog</Link>
 					</NavbarBrand>
 
-					<NavLink href="/login">Login</NavLink>
+					{token ?
+						<a>Logout of {username}</a>
+						:
+						<NavLink href="/login">Login</NavLink>
+					}
+					
 				</Navbar>
 
 				<Switch>

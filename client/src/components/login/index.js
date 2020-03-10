@@ -3,7 +3,7 @@ import { InputGroup, Card, CardText, CardBody, Container, Row, Col, Button, Inpu
 import './style.css';
 import { useLazyQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-
+import { Redirect } from "react-router-dom";
 const Login = props => {
 
 	const [username, setUsername] = useState('');
@@ -41,8 +41,15 @@ const Login = props => {
 		login();
 		setFormDirty(false);
 	}
-
 	console.log(called, data, loading, error);
+
+	if (!formDirty && !loading && data) {
+		console.log('boom')
+		localStorage.setItem('token', data.login.token);
+		localStorage.setItem('username', data.login.userName);
+
+		return <Redirect to="/" />
+	}
 
 	return (
 		<div className="Login">
@@ -58,7 +65,7 @@ const Login = props => {
 							<CardBody>
 								<h2>Login</h2>
 								<CardText>Enter your username and password to login</CardText>
-								
+
 								<InputGroup>
 									<Input placeholder="username" className="field" value={username} onChange={handleUsernameChange} />
 								</InputGroup>
