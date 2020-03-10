@@ -81,12 +81,6 @@ function PostEdit() {
 		setFormDirty(false);
 	}
 
-
-	console.log(editedPostData, mutationProcessing, saveError);
-	if(editedPostData && !mutationProcessing && !saveError) {
-
-	}
-
 	if (loading || mutationProcessing) return (
 		<Container className="themed-container">
 			<Spinner type="grow" color="primary" />
@@ -111,6 +105,12 @@ function PostEdit() {
 								Changes saved successfully.
 							</Alert>
 						)}
+						<Card className="loginForm">
+							<CardBody>
+								<input type="file" />
+								<img src="https://via.placeholder.com/100/09f/fff.png%20C/O%20https://placeholder.com/" width="120"/>
+							</CardBody>
+						</Card>
 						<Card className="loginForm">
 							<CardBody>
 								<InputGroup>
