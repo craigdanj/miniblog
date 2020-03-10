@@ -4,6 +4,7 @@ const { ApolloServer } = require('apollo-server');
 const graphqlSchema = require('./graphql/schema');
 const _ = require('lodash');
 const faker = require('faker');
+const jwt = require('jsonwebtoken');
 
 //Setting seed for consistent results
 faker.seed(123);
@@ -54,6 +55,26 @@ PostModel.sync({force: true}).then(() => {
 //Resolvers
 const graphqlResolvers = {
     Query: {
+		login: (root ,args, context, info) => {
+			if (args.email === 'admin' && args.password === 'admin') {
+				const userId = 1;
+
+				const token = jwt.sign(
+					{
+						userId,
+						email: args.email
+					},
+					'yoursecretgoeshere',
+					{ expiresIn: '1h' }
+				);
+
+				return {
+					token,
+					userId: userId.toString(),
+					userName: 'Administrator'
+				}
+			}
+		},
 		posts: (root ,args, context, info) => {
 			const limit = 10;
 			const offset = args.page ? (args.page - 1) * limit : 0;

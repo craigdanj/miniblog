@@ -19,7 +19,14 @@ module.exports = gql`
         content: String!
     }
 
+    type AuthData {
+        token: String!
+        userId: ID!
+        userName: String!
+    }
+
     type Query {
+        login(email: String!, password: String!): AuthData!
 		posts(page: Int): PostResponse
 	}
 
