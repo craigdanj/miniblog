@@ -26,6 +26,10 @@ module.exports = gql`
         userName: String!
     }
 
+    type Comment {
+        text: String!
+    }
+
     type Query {
         login(email: String!, password: String!): AuthData!
 		posts(page: Int): PostsResponse
@@ -35,4 +39,8 @@ module.exports = gql`
     type Mutation {
 		editPost(postInput: PostInputData): Post!
 	}
+
+    type Subscription {
+        commentAdded: Comment 
+    }
 `;

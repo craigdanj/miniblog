@@ -1,10 +1,17 @@
-const Sequelize = require('sequelize');
-const { ApolloServer } = require('apollo-server');
+// const { PubSub } = require('apollo-server');
+const http = require('http');
+const { ApolloServer, PubSub } = require('apollo-server-express');
+const express = require('express');
 
 const graphqlSchema = require('./graphql/schema');
+const Sequelize = require('sequelize');
+
 const _ = require('lodash');
 const faker = require('faker');
 const jwt = require('jsonwebtoken');
+
+const pubsub = new PubSub();
+const COMMENT_ADDED = 'COMMENT_ADDED';
 
 //Setting seed for consistent results
 faker.seed(123);
@@ -124,16 +131,45 @@ const graphqlResolvers = {
 				}
 			})
 		}
-	}
+		// addComent(root ,args, context, info) {
+		// 	pubsub.publish(COMMENT_ADDED, { commentAdded: { text: 'new Comment'} });
+		// 	return 'test';
+		// }
+	},
+	Subscription: {
+		commentAdded: {
+			// Additional event labels can be passed to asyncIterator creation
+			subscribe: () => pubsub.asyncIterator(COMMENT_ADDED),
+		},
+	},
 };
 
 
-//Startup the server
+// //Startup the server
+// const server = new ApolloServer({
+//     typeDefs: graphqlSchema,
+//     resolvers: graphqlResolvers
+// });
+
+// server.listen().then(({ url }) => {
+// 	console.log(`🚀  Server ready at ${url}`);
+// });
+
+
+const PORT = 4000;
+const app = express();
 const server = new ApolloServer({
-    typeDefs: graphqlSchema,
+	typeDefs: graphqlSchema,
     resolvers: graphqlResolvers
 });
 
-server.listen().then(({ url }) => {
-	console.log(`🚀  Server ready at ${url}`);
-});
+server.applyMiddleware({app})
+
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
+
+// ⚠️ Pay attention to the fact that we are calling `listen` on the http server variable, and not on `app`.
+httpServer.listen(PORT, () => {
+	console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`)
+	console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)
+})
