@@ -12,5 +12,5 @@ The purpose of this project is to demo how common features required by web apps 
 1. Apollo server for the backend.
 2. Apollo react for the client.
 
-##### It also uses React hooks and GraphQL hooks in the client since hooks is what React projects will eventually move towards.
+#### It also uses React hooks and GraphQL hooks in the client since hooks is what React projects will eventually move towards.
 
