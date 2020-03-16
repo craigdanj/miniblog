@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useSubscription } from "@apollo/react-hooks";
 import './style.css';
 import gql from "graphql-tag";
 import { Spinner, Card, CardBody, Container, Row, Col, Button, Input } from 'reactstrap';
@@ -34,6 +34,17 @@ function FileUpload() {
 
 	const submitChat = () => addComment({ variables: { text } });
 
+
+	const COMMENTS_SUBSCRIPTION = gql`
+		subscription commentAdded {
+			commentAdded {
+				text
+			}
+		}
+	`;
+
+	const { data: commentData, loading: loadingComment } = useSubscription(COMMENTS_SUBSCRIPTION);
+
 	return (
 		<div className="editPost">
 			<Container>
@@ -47,7 +58,8 @@ function FileUpload() {
 								<Button color="primary" onClick={submitChat}>Submit</Button>
 								{loading && <Spinner type="grow" color="primary" />}
 							</CardBody>
-							{data && data.addComment}
+							{/* {data && data.addComment} */}
+							>>{commentData && commentData.commentAdded && commentData.commentAdded.text}
 						</Card>
 					</Col>
 				</Row>
