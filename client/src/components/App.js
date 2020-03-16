@@ -4,6 +4,8 @@ import {
 	Navbar,
 	NavbarBrand,
 	NavLink,
+	NavItem,
+	Nav,
 	Button
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -64,6 +66,14 @@ function App() {
 						<Link to="/">Miniblog</Link>
 					</NavbarBrand>
 
+					<Nav className="mr-auto" navbar>
+						{/* <Link to="/chat">Chat</Link> */}
+						<NavItem>
+							<Link to="/file-upload">File Upload</Link>
+						</NavItem>
+					</Nav>
+
+
 					{token ?
 						<Button onClick={handleLogout}>Logout {username}</Button>
 						:
@@ -86,6 +96,9 @@ function App() {
 					</Route>
 					<Route path="/file-upload">
 						<FileUpload />
+					</Route>
+					<Route path="/chat">
+						{/* <Chat /> */}
 					</Route>
 					<Route path="/">
 						<PostList />
