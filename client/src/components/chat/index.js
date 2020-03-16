@@ -33,7 +33,10 @@ function FileUpload() {
 		{ data, loading, error }
 	] = useMutation(ADD_COMMENT);
 
-	const submitChat = () => addComment({ variables: { text } });
+	const submitChat = () => {
+		addComment({ variables: { text } });
+		setText('');
+	};
 
 
 	const COMMENTS_SUBSCRIPTION = gql`
@@ -47,7 +50,8 @@ function FileUpload() {
 	const { data: commentData, loading: loadingComment } = useSubscription(COMMENTS_SUBSCRIPTION, {
 		onSubscriptionData: ({subscriptionData}) => {
 			const newComment = subscriptionData.data.commentAdded.text;
-			setChatList([...chatList, newComment ])
+			setChatList([...chatList, newComment ]);
+			window.scrollTo(0,document.body.scrollHeight)
 		}
 	});
 
@@ -68,7 +72,7 @@ function FileUpload() {
 						<h3>Chat:</h3>
 						<Card className="chatForm">
 							<CardBody>
-								<Input type="textarea" name="chatText" required onChange={handleTextChange}/>
+								<Input type="textarea" name="chatText" value={text} required onChange={handleTextChange}/>
 								<br/>
 								<Button color="primary" onClick={submitChat}>Submit</Button>
 								{loading && <Spinner type="grow" color="primary" />}
