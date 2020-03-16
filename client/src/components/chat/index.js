@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useMutation, useSubscription } from "@apollo/react-hooks";
 import './style.css';
 import gql from "graphql-tag";
-import { Spinner, Card, CardBody, Container, Row, Col, Button, Input, Alert } from 'reactstrap';
+import { Spinner, Card, CardBody, Container, Row, Col, Button, Input } from 'reactstrap';
 
 function FileUpload() {
 	const [token, setToken] = useState(null);
@@ -34,8 +34,10 @@ function FileUpload() {
 	] = useMutation(ADD_COMMENT);
 
 	const submitChat = () => {
-		addComment({ variables: { text } });
-		setText('');
+		if(text.length) {
+			addComment({ variables: { text } });
+			setText('');
+		}
 	};
 
 
@@ -72,7 +74,7 @@ function FileUpload() {
 						<h3>Chat (live):</h3>
 						<Card className="chatForm">
 							<CardBody>
-								<Input type="textarea" name="chatText" value={text} required onChange={handleTextChange}/>
+								<Input type="textarea" rows="4" name="chatText" value={text} required onChange={handleTextChange}/>
 								<br/>
 								<Button color="primary" onClick={submitChat}>Submit</Button>
 								{loading && <Spinner type="grow" color="primary" />}
