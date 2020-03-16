@@ -3,8 +3,9 @@ The purpose of this project is to demo how common features required by web apps 
 1. Querying data
 2. Mutating / modifying data.
 3. Paginating through data.
-4. File uploads.
-5. Realtime updates.
+4. Authentication.
+5. File uploads.
+6. Realtime updates.
 
 
 ## This project uses:
