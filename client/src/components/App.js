@@ -63,11 +63,12 @@ function App() {
 		<div className="App">
 			<Router>
 				<Navbar color="light" light expand="md" sticky="top">
-					<NavbarBrand href="/" className="mr-auto">
+					<NavbarBrand href="/">
 						<Link to="/">Miniblog</Link>
 					</NavbarBrand>
 
 					<Nav className="mr-auto" navbar>
+						/ &nbsp;
 						<NavItem>
 							<Link to="/chat">Chat</Link>
 						</NavItem>

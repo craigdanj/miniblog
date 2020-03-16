@@ -9,8 +9,8 @@ const PostList = () => {
 	const { pageNo } = useParams();
 
 	const GET_POSTS = gql`
-		query {
-			posts(page: ${pageNo || 1}) {
+		query getPosts($page: Int){
+			posts(page: $page) {
 				total
 				posts {
 					id
@@ -21,7 +21,11 @@ const PostList = () => {
 		}
 	`;
 
-	const { data, loading, error } = useQuery(GET_POSTS);
+	const { data, loading, error } = useQuery(GET_POSTS, {
+		variables: {
+			page: parseInt(pageNo) || 1
+		}
+	});
 	const totalPostCount = data && data.posts && data.posts.total;
 	let postList = [];
 	let paginationList = [];
