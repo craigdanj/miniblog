@@ -23,9 +23,7 @@ function FileUpload() {
 
 	const ADD_COMMENT = gql`
 		mutation addComment($text: String!) {
-			addComment(text: $text) {
-				text
-			}
+			addComment(text: $text)
 		}
 	`;
 
@@ -49,6 +47,7 @@ function FileUpload() {
 								<Button color="primary" onClick={submitChat}>Submit</Button>
 								{loading && <Spinner type="grow" color="primary" />}
 							</CardBody>
+							{data && data.addComment}
 						</Card>
 					</Col>
 				</Row>

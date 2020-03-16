@@ -45,7 +45,7 @@ module.exports = gql`
     type Mutation {
 		editPost(postInput: PostInputData): Post!
         singleUpload(file: Upload!): File!
-        addComment(text: String!): String
+        addComment(text: String!): String!
 	}
 
     type Subscription {

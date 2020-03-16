@@ -144,11 +144,12 @@ const graphqlResolvers = {
 
 			// 3. Record the file upload in your DB.
 			return { filename };
+		},
+		addComment(root ,args, context, info) {
+			console.log(args.text);
+			pubsub.publish(COMMENT_ADDED, { commentAdded: { text: args.text} });
+			return args.text;
 		}
-		// addComent(root ,args, context, info) {
-		// 	pubsub.publish(COMMENT_ADDED, { commentAdded: { text: 'new Comment'} });
-		// 	return 'test';
-		// }
 	},
 	Subscription: {
 		commentAdded: {
