@@ -69,7 +69,7 @@ function FileUpload() {
 				</Row>
 				<Row>
 					<Col sm="12" md={{ size: 6, offset: 3 }}>
-						<h3>Chat:</h3>
+						<h3>Chat (live):</h3>
 						<Card className="chatForm">
 							<CardBody>
 								<Input type="textarea" name="chatText" value={text} required onChange={handleTextChange}/>

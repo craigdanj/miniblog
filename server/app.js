@@ -146,8 +146,10 @@ const graphqlResolvers = {
 			return { filename };
 		},
 		addComment(root ,args, context, info) {
-			console.log(args.text);
 			pubsub.publish(COMMENT_ADDED, { commentAdded: { text: args.text} });
+			//The text here is just published in this demo.
+			//In a real world applciation you would want to store this in a database.
+			//Previous chat history can then be fetched via a query so the user can read previous chat messages.
 			return args.text;
 		}
 	},
@@ -155,9 +157,6 @@ const graphqlResolvers = {
 		commentAdded: {
 			// Additional event labels can be passed to asyncIterator creation
 			subscribe: () => pubsub.asyncIterator(COMMENT_ADDED)
-            // (payload, variables) => {
-            //  return payload.commentAdded.repository_name === variables.repoFullName;
-            // },
 		},
 	},
 };
