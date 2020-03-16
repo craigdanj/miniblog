@@ -29,49 +29,31 @@ function FileUpload() {
 
 	const [
 		uploadFile,
-		{ data, loading: uploadInProgress, error: error }
-	] = useMutation(UPLOAD_FILE, {
-		variables: {
-			file
+		{ data, loading: uploadInProgress, error }
+	] = useMutation(UPLOAD_FILE);
+
+	const handleFileChange = ({
+		target: {
+		  	validity,
+		  	files: [file]
 		}
-	});
-
-	const handleFileChange = e => {
-		console.log(e.target.files[0]);
-		setFile(e.target.value);
-		setFormDirty(true);
-	}
-
-	const handleUpload = () => {
-		uploadFile();
-		setFormDirty(false);
-	}
-
-	// if (loading) return (
-	// 	<Container className="themed-container">
-	// 		<Spinner type="grow" color="primary" />
-	// 	</Container>
-	// );
-	// if (error) return <p>ERROR</p>;
+	}) => validity.valid && uploadFile({ variables: { file } });
 
 	return (
 		<div className="editPost">
 			<Container>
 				<Row>
 					<Col sm="12" md={{ size: 6, offset: 3 }}>
-
+						<h3>File upload:</h3>
 						{data && !uploadInProgress && !error && !formDirty && (
 							<Alert color="success" fade={false}>
 								Uploaded successfully.
 							</Alert>
 						)}
-
 						<Card className="uploadForm">
 							<CardBody>
 								<input type="file" required onChange={handleFileChange}/>
-								{/* <img src="https://via.placeholder.com/100/09f/fff.png%20C/O%20https://placeholder.com/" width="120"/> */}
-								<Button color="primary" onClick={handleUpload}>Upload</Button>
-
+								{uploadInProgress && <Spinner type="grow" color="primary" />}
 							</CardBody>
 						</Card>
 					</Col>

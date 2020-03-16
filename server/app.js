@@ -135,6 +135,7 @@ const graphqlResolvers = {
 			console.log(file);
 
 			const { stream, filename, mimetype, encoding } = await file;
+			console.log(stream, filename, mimetype, encoding);
 
 			// 1. Validate file metadata.
 
@@ -142,19 +143,7 @@ const graphqlResolvers = {
 			// https://nodejs.org/api/stream.html
 
 			// 3. Record the file upload in your DB.
-			// const id = await recordFile( … )
 			return { filename };
-
-			// return args.file.then(file => {
-			// 	const { stream, filename, mimetype, encoding } = file;
-			// 	console.log(args, file);
-			// 	//Contents of Upload scalar: https://github.com/jaydenseric/graphql-upload#class-graphqlupload
-			// 	//file.stream is a node stream that contains the contents of the uploaded file
-			// 	//node stream api: https://nodejs.org/api/stream.html
-				
-			// 	return { filename, mimetype, encoding };
-			// 	// return file;
-			// });
 		}
 		// addComent(root ,args, context, info) {
 		// 	pubsub.publish(COMMENT_ADDED, { commentAdded: { text: 'new Comment'} });
