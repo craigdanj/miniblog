@@ -130,6 +130,31 @@ const graphqlResolvers = {
 					})
 				}
 			})
+		},
+		async singleUpload(parent, { file }) {
+			console.log(file);
+
+			const { stream, filename, mimetype, encoding } = await file;
+
+			// 1. Validate file metadata.
+
+			// 2. Stream file contents into cloud storage:
+			// https://nodejs.org/api/stream.html
+
+			// 3. Record the file upload in your DB.
+			// const id = await recordFile( … )
+			return { filename };
+
+			// return args.file.then(file => {
+			// 	const { stream, filename, mimetype, encoding } = file;
+			// 	console.log(args, file);
+			// 	//Contents of Upload scalar: https://github.com/jaydenseric/graphql-upload#class-graphqlupload
+			// 	//file.stream is a node stream that contains the contents of the uploaded file
+			// 	//node stream api: https://nodejs.org/api/stream.html
+				
+			// 	return { filename, mimetype, encoding };
+			// 	// return file;
+			// });
 		}
 		// addComent(root ,args, context, info) {
 		// 	pubsub.publish(COMMENT_ADDED, { commentAdded: { text: 'new Comment'} });
@@ -145,17 +170,6 @@ const graphqlResolvers = {
 };
 
 
-// //Startup the server
-// const server = new ApolloServer({
-//     typeDefs: graphqlSchema,
-//     resolvers: graphqlResolvers
-// });
-
-// server.listen().then(({ url }) => {
-// 	console.log(`🚀  Server ready at ${url}`);
-// });
-
-
 const PORT = 4000;
 const app = express();
 const server = new ApolloServer({
@@ -168,7 +182,6 @@ server.applyMiddleware({app})
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
-// ⚠️ Pay attention to the fact that we are calling `listen` on the http server variable, and not on `app`.
 httpServer.listen(PORT, () => {
 	console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`)
 	console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)

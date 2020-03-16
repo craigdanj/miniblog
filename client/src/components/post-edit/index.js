@@ -96,7 +96,7 @@ function PostEdit() {
 					<Col sm="12" md={{ size: 6, offset: 3 }}>
 						{error && !formDirty && (
 							<Alert color="danger" fade={false}>
-								Could not login. Please ensure the username and password are correct.
+								Error
 							</Alert>
 						)}
 
@@ -105,12 +105,7 @@ function PostEdit() {
 								Changes saved successfully.
 							</Alert>
 						)}
-						<Card className="loginForm">
-							<CardBody>
-								<input type="file" />
-								<img src="https://via.placeholder.com/100/09f/fff.png%20C/O%20https://placeholder.com/" width="120"/>
-							</CardBody>
-						</Card>
+
 						<Card className="loginForm">
 							<CardBody>
 								<InputGroup>

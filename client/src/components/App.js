@@ -18,6 +18,7 @@ import Login from './login/';
 import Post from './post/';
 import PostList from './post-list/';
 import PostEdit from './post-edit/';
+import FileUpload from './file-upload/';
 
 
 function App() {
@@ -82,6 +83,9 @@ function App() {
 					</Route>
 					<Route path="/posts/:pageNo">
 						<PostList />
+					</Route>
+					<Route path="/file-upload">
+						<FileUpload />
 					</Route>
 					<Route path="/">
 						<PostList />

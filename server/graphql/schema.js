@@ -26,6 +26,12 @@ module.exports = gql`
         userName: String!
     }
 
+    type File {
+        filename: String!
+        mimetype: String!
+        encoding: String!
+    }
+
     type Comment {
         text: String!
     }
@@ -38,6 +44,7 @@ module.exports = gql`
 
     type Mutation {
 		editPost(postInput: PostInputData): Post!
+        singleUpload(file: Upload!): File!
 	}
 
     type Subscription {
