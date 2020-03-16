@@ -21,6 +21,7 @@ import Post from './post/';
 import PostList from './post-list/';
 import PostEdit from './post-edit/';
 import FileUpload from './file-upload/';
+import Chat from './chat/';
 
 
 function App() {
@@ -67,7 +68,10 @@ function App() {
 					</NavbarBrand>
 
 					<Nav className="mr-auto" navbar>
-						{/* <Link to="/chat">Chat</Link> */}
+						<NavItem>
+							<Link to="/chat">Chat</Link>
+						</NavItem>
+						&nbsp; / &nbsp;
 						<NavItem>
 							<Link to="/file-upload">File Upload</Link>
 						</NavItem>
@@ -98,7 +102,7 @@ function App() {
 						<FileUpload />
 					</Route>
 					<Route path="/chat">
-						{/* <Chat /> */}
+						<Chat />
 					</Route>
 					<Route path="/">
 						<PostList />
