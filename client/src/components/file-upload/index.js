@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useMutation } from "@apollo/react-hooks";
 import './style.css';
 import gql from "graphql-tag";
-// import { useParams } from "react-router-dom";
 import { Spinner, Card, CardBody, Container, Row, Col, Button, Alert } from 'reactstrap';
 
 function FileUpload() {
 	const [token, setToken] = useState(null);
-	const [formDirty, setFormDirty] = useState(false);
-	const [file, setFile] = useState(null);
 
 	useEffect(() => {
 		const t = localStorage.getItem('token');
@@ -45,7 +42,7 @@ function FileUpload() {
 				<Row>
 					<Col sm="12" md={{ size: 6, offset: 3 }}>
 						<h3>File upload:</h3>
-						{data && !uploadInProgress && !error && !formDirty && (
+						{data && !uploadInProgress && !error && (
 							<Alert color="success" fade={false}>
 								Uploaded successfully.
 							</Alert>
