@@ -1,5 +1,5 @@
 # miniblog
-The purpose of this project is to demo how common features required by web apps ca nbe implemented with GraphQL. This includes:
+The purpose of this project is to demo how common features required by web apps can be implemented with GraphQL. This includes:
 1. Querying data
 2. Mutating / modifying data.
 3. Paginating through data.
