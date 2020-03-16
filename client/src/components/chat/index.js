@@ -51,7 +51,7 @@ function FileUpload() {
 		onSubscriptionData: ({subscriptionData}) => {
 			const newComment = subscriptionData.data.commentAdded.text;
 			setChatList([...chatList, newComment ]);
-			window.scrollTo(0,document.body.scrollHeight)
+			window.scrollTo(0,document.body.scrollHeight);
 		}
 	});
 
@@ -61,9 +61,9 @@ function FileUpload() {
 				<Row>
 					<Col sm="12" md={{ size: 6, offset: 3 }}>
 						{chatList.map(text => (
-							<Alert color="primary">
+							<div class="chatBubble">
 								{text}
-						  	</Alert>
+						  	</div>
 						))}
 					</Col>
 				</Row>
