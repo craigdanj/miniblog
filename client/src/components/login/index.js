@@ -31,7 +31,7 @@ const Login = props => {
 		}
 	`;
 
-	const [login, { called, loading, data, error }] = useLazyQuery(LOGIN, {
+	const [login, { loading, data, error }] = useLazyQuery(LOGIN, {
 		variables: {
 			email: username,
 			password: password
