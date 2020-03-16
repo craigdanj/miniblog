@@ -154,7 +154,10 @@ const graphqlResolvers = {
 	Subscription: {
 		commentAdded: {
 			// Additional event labels can be passed to asyncIterator creation
-			subscribe: () => pubsub.asyncIterator(COMMENT_ADDED),
+			subscribe: () => pubsub.asyncIterator(COMMENT_ADDED)
+            // (payload, variables) => {
+            //  return payload.commentAdded.repository_name === variables.repoFullName;
+            // },
 		},
 	},
 };
