@@ -42,16 +42,13 @@ const PostList = () => {
 		postList = data.posts.posts.map(post => (
 			<div className="postExcerpt" key={post.id}>
 				<Media>
-					<Media left href="#">
-						<Media object src="https://via.placeholder.com/100/09f/fff.png%20C/O%20https://placeholder.com/" alt="Generic placeholder image" />
-					</Media>
-
 					<Media body>
 						<Media heading>
 							<a href={`/post/${post.id}`}>{post.title}</a>
 						</Media>
-						<p>12/2/2020</p>
-						{post.content}
+						<p>
+							{post.content}
+						</p>
 					</Media>
 				</Media>
 			</div>
