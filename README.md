@@ -21,4 +21,4 @@ The purpose of this project is to demo how common features required by web apps 
 
 Setup:
 1. Clone to disk.
-2. Run 'npm i && npm start' to install and fire up both client and server.
+2. Run 'npm i && npm start' to install and fire up both client and server from their respective folders.
