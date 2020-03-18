@@ -15,6 +15,6 @@ The purpose of this project is to demo how common features required by web apps 
 #### It also uses React hooks and GraphQL hooks in the client since hooks is what React projects will eventually move towards.
 
 - The blog demonstrates how queries, mutations and pagination wih queries is done.
-- The login page of course demonstrates how token authentication. Since this a demo it stores the AUTH cookie in local storage however ideally you would have it stored as a cookie via HTTP headers with the 'Secure' and 'HttpOnly' driectives set.
-- The chat page demonstartes the use of subscriptions. Note when you refresh the chat page you loose your chat history since it isnt saved in a database.
+- The login page of course demonstrates how token authentication. Since this a demo it stores the AUTH cookie in local storage however you could also have it stored as a cookie via HTTP headers with the 'Secure' and 'HttpOnly' directives set.
+- The chat page demonstrates the use of subscriptions. Note when you refresh the chat page you loose your chat history since it isn't saved in a database. It works like live chat. You see only what you’ve typed since you started the chat.
 - The file upload page demonstrates how file uploads can be handled with GraphQL. For this feature too the backend does not store data but does return a response.
